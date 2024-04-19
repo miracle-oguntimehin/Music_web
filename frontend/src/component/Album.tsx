@@ -1,34 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AlbumCard from './AlbumCard';
-import Player from './Player';
+import Card from './Card';
+
+interface AlbumProps {
+  id: number;
+  name: string;
+  artists: {
+    name: string;
+  }[];
+  images: {
+    url: string;
+  }[];
+}
 
 const App = () => {
-  const [albums, setAlbums] = useState([]);
+  const [albumsData, setAlbumsData] = useState<AlbumProps[]>([]);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem('access_token');
     const fetchAlbums = async () => {
-      try {
-        const response = await axios.get('YOUR_API_ENDPOINT');
-        setAlbums(response.data); // Assuming the response data is an array of albums
-      } catch (error) {
-        console.error('Error fetching albums:', error);
+      if (accessToken) {
+        try {
+          const config = {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          };
+
+          const res = await axios.get(
+            `https://api.spotify.com/v1/browse/new-releases?limit=15`,
+            config
+          );
+          setAlbumsData(res.data.albums.items);
+          console.log(res.data)
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
-
     fetchAlbums();
-  }, []); // Empty dependency array ensures this effect runs only once on component mount
+  }, []);
 
   return (
     <div>
-      {/* {albums.map((album) => (
-        <div key={album.id}>
-          <AlbumCard album={album} />
-          <Player tracks={album.tracks} />
-        </div>
-      ))} */}
+      <h1 className="title">Latest Albums</h1>
+      <div className='container'>
+        {albumsData.map((album, index) => (
+          <Card album={album} key={index} />
+        ))}
+      </div>
     </div>
   );
 };
+
 
 export default App;
