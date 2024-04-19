@@ -5,13 +5,13 @@ import Card from './Card';
 import PlaylistOrAlbum from './PlaylistorAlbum';
 
 interface AlbumProps {
-  id:  number;
+  id: number;
   name: string;
   artists: {
-      name: string;
+    name: string;
   }[];
   images: {
-      url: string;
+    url: string;
   }[];
 }
 
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
         console.log(response.data);
         localStorage.setItem('access_token', response.data.access_token);
       } catch (error) {
-        console.error( error);
+        console.error(error);
       }
     };
 
@@ -81,12 +81,13 @@ const Home: React.FC = () => {
   return (
     <div>
       <h1 className="title">Music Data</h1>
-      <Login />
-      <hr/>
+      {!albumsData.length && <Login />}
+      <hr />
+      {!albumsData.length && <h1>Login Using Spotify In order to see Albums and Artists Suggestions</h1>}
       <div className='container'>
-      {albumsData.map((album, index) => (
-        <Card album={album} key={index} />
-      ))}
+        {albumsData.map((album, index) => (
+          <Card album={album} key={index} />
+        ))}
       </div>
     </div>
   );

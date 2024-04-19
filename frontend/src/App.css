@@ -1,8 +1,7 @@
 /* Set background color for the entire application */
 body {
-  background-color: #dceced
+  background-color: #dceced;
 }
-
 
 /*Header backgroundcolor*/
 .header-container {
@@ -10,22 +9,19 @@ body {
   padding: 0px;
 }
 
-
-
 .sidebar {
-  width: 200px; 
-  height: 100%; 
+  width: 200px;
+  height: 100%;
   position: fixed;
   left: 0;
   background-color: #dceced;
-  border-right: 2px solid teal; 
+  border-right: 2px solid teal;
   overflow: hidden;
 }
 
 .nav-header-text {
-  display: none; 
+  display: none;
 }
-
 
 .nav-list {
   list-style-type: none;
@@ -46,12 +42,12 @@ body {
   cursor: pointer;
 }
 
-.nav-item-container:hover  .nav-item {
+.nav-item-container:hover .nav-item {
   color: white !important;
   background-color: #0b2a2f;
 }
 
-.nav-item-container:hover  .nav-item .nav-span {
+.nav-item-container:hover .nav-item .nav-span {
   color: white !important;
   background-color: #0b2a2f;
 }
@@ -60,8 +56,8 @@ body {
   font-family: Calibri, Arial, sans-serif;
   font-size: 14pt;
   color: teal !important;
-  font-weight: normal; 
-  letter-spacing: 0.5px; 
+  font-weight: normal;
+  letter-spacing: 0.5px;
   margin-left: 15px;
 }
 
@@ -70,28 +66,17 @@ body {
   margin-right: 10px;
 }
 
-
 /* Sidebar.css */
 
 .nav-link {
-  color: blue; 
-  text-decoration: blue; 
+  color: blue;
+  text-decoration: blue;
 }
 
 .active-link {
-  font-weight: bold; 
-  color: #FF5722; 
+  font-weight: bold;
+  color: #ff5722;
 }
-
-
-
-
-
-
-
-
-
-
 
 .App {
   text-align: center;
@@ -135,10 +120,6 @@ body {
 .nav-icon {
   margin-right: 5px;
 }
- 
-
-
-
 
 #app-cover {
   position: fixed;
@@ -443,4 +424,39 @@ body {
 .container {
   display: flex;
   flex-wrap: wrap;
+}
+
+/* Login btnl */
+
+.btnl {
+  display: flex;
+  place-items: center;
+  background: #e3edf7;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.btnl:hover {
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+    -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+    0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateY(0.5em);
+}
+
+.btnl .icon {
+  transition: transform 0.5s;
+  margin-left: 10px;
+  font-size: 18pt;
+  color: green;
+}
+
+.btnl:hover .icon {
+  transform: scale(0.9);
 }
