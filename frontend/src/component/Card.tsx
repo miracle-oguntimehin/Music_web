@@ -18,7 +18,7 @@ const Card: React.FC<AlbumProps> = ({ album }) => {
     const navigate = useNavigate()
   return (
     <div className="card">
-      <img src={album.images[1].url} className="card-img-top" alt={album.name} />
+      <img src={album.images[2].url} className="card-img-top" alt={album.name} />
       <div className="card-body">
         <h5 className="card-title">{album.name}</h5>
         <p className="card-text">
