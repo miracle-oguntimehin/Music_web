@@ -69,7 +69,7 @@ const Home: React.FC = () => {
             config
           );
           setAlbumsData(res.data.albums.items);
-          console.log(res.data);
+          console.log(res.data)
         } catch (err) {
           console.log(err);
         }
