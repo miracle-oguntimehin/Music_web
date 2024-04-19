@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Login from './Login';
-import Card from './Card';
+import { Link } from 'react-router-dom';
 
-interface Category {
-  href: string;
-  limit: number;
-  next: string | null;
-  offset: number;
-  previous: string | null;
-  total: number;
-  items: CategoryItem[];
-}
+// interface Category {
+//   href: string;
+//   limit: number;
+//   next: string | null;
+//   offset: number;
+//   previous: string | null;
+//   total: number;
+//   items: CategoryItem[];
+// }
 
 interface CategoryItem {
   href: string;
@@ -26,7 +26,7 @@ interface CategoryItem {
 
 
 const Home: React.FC = () => {
-  const [Data, setData] = useState<Category[]>([]);
+  const [Data, setData] = useState<CategoryItem[]>([]);
   const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
   const clientSecret = '4bbb8502cc4a48b8ae37f006266516f1'
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
             `https://api.spotify.com/v1/browse/categories?limit=30`,
             config
           );
-          setData(res.data.categories);
+          setData(res.data.categories.items);
           console.log(res.data)
         } catch (err) {
           console.log(err);
@@ -90,19 +90,20 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h1 className="title">Browse the most exiting music categories</h1>
+      {Data && <Login />}
+      {Data ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
       <hr />
       <div className="container mt-4">
         <div className="row">
-          {Data.items?.map((category: { icons: { url: string | undefined; }[]; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined; href: string | undefined; }, index: React.Key | null | undefined) => (
+          {Data?.map((category: { id: string; icons: { url: string | undefined; }[]; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined; href: string | undefined; }, index: React.Key | null | undefined) => (
             <div key={index} className="col-lg-4 mb-4">
               <div className="card" style={{ width: '18rem' }}>
-                <img src={category.icons[0].url} className="card-img-top" alt={category.name} />
+                <img src={category.icons[0].url} className="card-img-top" alt={`${category.name}`} />
                 <div className="card-body">
                   <h5 className="card-title">{category.name}</h5>
-                  <a href={category.href} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                  <Link to={`/category/${category.id}`} className="btn btn-primary">
                     Explore
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
