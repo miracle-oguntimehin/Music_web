@@ -2,21 +2,31 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Card from './Card';
-import PlaylistOrAlbum from './PlaylistorAlbum';
 
-interface AlbumProps {
-  id: number;
-  name: string;
-  artists: {
-    name: string;
-  }[];
-  images: {
-    url: string;
-  }[];
+interface Category {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
+  items: CategoryItem[];
 }
 
+interface CategoryItem {
+  href: string;
+  icons: {
+    url: string;
+    height: number;
+    width: number;
+  }[];
+  id: string;
+  name: string;
+}
+
+
 const Home: React.FC = () => {
-  const [albumsData, setAlbumsData] = useState<AlbumProps[]>([]);
+  const [Data, setData] = useState<Category[]>([]);
   const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
   const clientSecret = '4bbb8502cc4a48b8ae37f006266516f1';
@@ -65,10 +75,10 @@ const Home: React.FC = () => {
           };
 
           const res = await axios.get(
-            `https://api.spotify.com/v1/browse/new-releases?limit=15`,
+            `https://api.spotify.com/v1/browse/categories?limit=30`,
             config
           );
-          setAlbumsData(res.data.albums.items);
+          setData(res.data.categories);
           console.log(res.data)
         } catch (err) {
           console.log(err);
@@ -80,14 +90,24 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h1 className="title">Music Data</h1>
-      {!albumsData.length && <Login />}
+      <h1 className="title">Browse the most exiting music categories</h1>
       <hr />
-      {!albumsData.length && <h1>Login Using Spotify In order to see Albums and Artists Suggestions</h1>}
-      <div className='container'>
-        {albumsData.map((album, index) => (
-          <Card album={album} key={index} />
-        ))}
+      <div className="container mt-4">
+        <div className="row">
+          {Data.items?.map((category: { icons: { url: string | undefined; }[]; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined; href: string | undefined; }, index: React.Key | null | undefined) => (
+            <div key={index} className="col-lg-4 mb-4">
+              <div className="card" style={{ width: '18rem' }}>
+                <img src={category.icons[0].url} className="card-img-top" alt={category.name} />
+                <div className="card-body">
+                  <h5 className="card-title">{category.name}</h5>
+                  <a href={category.href} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    Explore
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
