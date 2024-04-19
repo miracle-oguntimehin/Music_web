@@ -1,0 +1,36 @@
+/* Custom styles */
+.header {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+  }
+  
+  .header-title {
+    margin: 0;
+  }
+  
+  .card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-text {
+    margin-bottom: 0;
+  }
+  
