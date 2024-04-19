@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaSpotify } from "react-icons/fa";
 
 const Login: React.FC = () => {
   const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
@@ -8,7 +9,14 @@ const Login: React.FC = () => {
     window.location.href = authUrl;
   };
 
-  return <button onClick={handleLoginClick}>Login with Spotify</button>;
+  return (
+    <>
+      <button type='button' className='btnl' onClick={handleLoginClick}>
+        Login
+        <FaSpotify className='icon' />
+      </button>
+      
+    </>);
 };
 
 export default Login;
