@@ -89,7 +89,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div><br />
       {Data && <Login />}
       <hr />
       {Data ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
