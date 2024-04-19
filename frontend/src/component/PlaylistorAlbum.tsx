@@ -16,38 +16,38 @@ const PlaylistOrAlbum: React.FC = () => {
 
   const id = useParams<{ id: string }>();
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       setIsLoading(true);
-//       setError(null);
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       setIsLoading(true);
+  //       setError(null);
 
-//       try {
-//         const endpoint = `https://api.spotify.com/v1/albums/${id}`;
+  //       try {
+  //         const endpoint = `https://api.spotify.com/v1/albums/${id}`;
 
-//         const response = await fetch(endpoint, {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
-//           },
-//         });
+  //         const response = await fetch(endpoint, {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
+  //           },
+  //         });
 
-//         if (!response.ok) {
-//           throw new Error(`Error fetching album data: ${response.statusText}`);
-//         }
+  //         if (!response.ok) {
+  //           throw new Error(`Error fetching album data: ${response.statusText}`);
+  //         }
 
-//         const data = await response.json();
-//         setAlbumData({ name: data.name }); // Extract only album name if needed
-//       } catch (error: any) {
-//         console.error('Error fetching album data:', error);
-//         setError(error.message);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
+  //         const data = await response.json();
+  //         setAlbumData({ name: data.name }); // Extract only album name if needed
+  //       } catch (error: any) {
+  //         console.error('Error fetching album data:', error);
+  //         setError(error.message);
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     };
 
-//     if ( id) {
-//       fetchData();
-//     }
-//   }, [id]);
+  //     if ( id) {
+  //       fetchData();
+  //     }
+  //   }, [id]);
 
   if (isLoading) {
     return <p>Loading album data...</p>;
@@ -61,15 +61,16 @@ const PlaylistOrAlbum: React.FC = () => {
 
   return (
     <div>
-        {id &&
-      <iframe
-        src={`https://open.spotify.com/embed/album/${id.id}`}
-        width="800"
-        height="800"
-        frameBorder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      ></iframe>}
+      {id &&
+        <iframe
+          title='Album'
+          src={`https://open.spotify.com/embed/album/${id.id}`}
+          width="800"
+          height="800"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>}
     </div>
   );
 };

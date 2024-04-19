@@ -6,16 +6,18 @@ import { Route, Routes } from "react-router-dom";
 import PlaylistOrAlbum from "./PlaylistorAlbum";
 import Album from "./Album";
 import Category from "./Category";
+import PlaylistEmbed from "./PlaylistEmbed";
 
 const MainContent: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/music" element={<MusicApp />} />
-      <Route path="/album" element={<Album />} />
+      <Route path="/albums" element={<Album />} />
       <Route path="/playlist/:id" element={<Playlist />} />
       <Route path="/category/:id" element={<Category />} />
       <Route path="/player/:id" element={<PlaylistOrAlbum />} />
+      <Route path="/player/playlist/:id" element={<PlaylistEmbed />} />
     </Routes>
   );
 };

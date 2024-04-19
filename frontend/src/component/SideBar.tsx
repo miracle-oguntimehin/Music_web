@@ -1,16 +1,10 @@
-import React, { useState } from "react";
-import { FaHome, FaUser, FaMusic } from "react-icons/fa";
+import React from "react";
+import { FaHome, FaMusic } from "react-icons/fa";
 import { IoAlbums } from "react-icons/io5";
-import { Link, useNavigate } from 'react-router-dom';
-import  Logo  from './logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
-
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
 
   return (
     <aside>
