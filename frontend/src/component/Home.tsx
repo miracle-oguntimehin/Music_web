@@ -91,8 +91,9 @@ const Home: React.FC = () => {
   return (
     <div>
       {Data && <Login />}
-      {Data ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
       <hr />
+      {Data ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
+
       <div className="container mt-4">
         <div className="row">
           {Data?.map((category: { id: string; icons: { url: string | undefined; }[]; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined; href: string | undefined; }, index: React.Key | null | undefined) => (
