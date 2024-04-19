@@ -5,6 +5,7 @@ import Playlist from "./PlayList";
 import Player from "./Player";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PlaylistOrAlbum from "./PlaylistorAlbum";
+import Album from "./Album";
 
 const MainContent: React.FC = () => {
   return (
