@@ -13,7 +13,7 @@ interface AlbumProps {
   }[];
 }
 
-const App = () => {
+const Album = () => {
   const [albumsData, setAlbumsData] = useState<AlbumProps[]>([]);
 
   useEffect(() => {
@@ -52,4 +52,4 @@ const App = () => {
 };
 
 
-export default App;
+export default Album;
