@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const [albumsData, setAlbumsData] = useState<AlbumProps[]>([]);
   const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
-  const clientSecret = '234d3f18f5914c87a9ae72dc25c504ba';
+  const clientSecret = '4bbb8502cc4a48b8ae37f006266516f1';
 
   const code = new URLSearchParams(window.location.search).get('code');
 
