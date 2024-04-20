@@ -7,9 +7,10 @@ import Album from "./Album";
 import Category from "./Category";
 import PlaylistEmbed from "./PlaylistEmbed";
 import Search from "../Search";
+import EmbeddedTrack from "./Player";
 
 const MainContent: React.FC = () => {
-  return (
+  return (<>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
@@ -19,6 +20,8 @@ const MainContent: React.FC = () => {
       <Route path="/player/:id" element={<PlaylistOrAlbum />} />
       <Route path="/player/playlist/:id" element={<PlaylistEmbed />} />
     </Routes>
+    <EmbeddedTrack />
+  </>
   );
 };
 

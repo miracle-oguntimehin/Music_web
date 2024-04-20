@@ -502,3 +502,9 @@ body {
 .search-btn:hover .search-icon {
   scale: 1.2;
 }
+
+.track-player {
+  position: fixed;
+  bottom: 0;
+  width: 60%;
+}
