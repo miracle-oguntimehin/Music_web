@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   const [Data, setData] = useState<CategoryItem[]>([]);
   const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
-  const clientSecret = 'b69b52555e4e411c9816753fd51fbecd';
+  const clientSecret = '45b18002a01e482aa7e842eb8c4b7e4e';
 
   const code = new URLSearchParams(window.location.search).get('code');
 
