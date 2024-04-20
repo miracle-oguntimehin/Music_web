@@ -345,8 +345,8 @@ body {
 
 #album-art.buffering img.active {
   opacity: 0.8;
-  filter: blur(2px);
   -webkit-filter: blur(2px);
+  filter: blur(2px);
 }
 
 #album-art.buffering #buffer-box {
@@ -459,4 +459,46 @@ body {
 
 .btnl:hover .icon {
   transform: scale(0.9);
+}
+
+.card {
+  background-color: transparent !important;
+  border: none;
+}
+.card-body {
+  background-color: transparent !important;
+}
+
+.search-input {
+  width: 85%;
+  margin: 25px 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14pt;
+  outline: none;
+}
+
+.search-btn {
+  width: auto;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  transition: 1s ease-in-out;
+  box-shadow: 1px 1px 3px 1px rgb(0, 15, 48);
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: transparent;
+}
+
+.search-icon {
+  transition: 1s ease-in-out;
+  font-size: 14pt;
+  color: green;
+}
+
+.search-btn:hover .search-icon {
+  scale: 1.2;
 }
