@@ -27,9 +27,9 @@ interface CategoryItem {
 
 const Home: React.FC = () => {
   const [Data, setData] = useState<CategoryItem[]>([]);
-  const clientId = '1b744272ce5646098063ccb0ecdfbab0';
+  const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
-  const clientSecret = '2e428da9fa8e4a8a93d31d28d3de5935'
+  const clientSecret = 'c9a77cd68aa24b10928be23547296a4e'
 
   const code = new URLSearchParams(window.location.search).get('code');
 
@@ -90,9 +90,9 @@ const Home: React.FC = () => {
 
   return (
     <div><br />
-      {!Data && <Login />}
+      {!Data.length && <Login />}
       <hr />
-      {!Data ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
+      {!Data.length ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
 
       <div className="container mt-4">
         <div className="row">
