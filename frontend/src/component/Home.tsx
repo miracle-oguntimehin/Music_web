@@ -3,16 +3,6 @@ import axios from 'axios';
 import Login from './Login';
 import { Link } from 'react-router-dom';
 
-// interface Category {
-//   href: string;
-//   limit: number;
-//   next: string | null;
-//   offset: number;
-//   previous: string | null;
-//   total: number;
-//   items: CategoryItem[];
-// }
-
 interface CategoryItem {
   href: string;
   icons: {
@@ -27,9 +17,9 @@ interface CategoryItem {
 
 const Home: React.FC = () => {
   const [Data, setData] = useState<CategoryItem[]>([]);
-  const clientId = '1b744272ce5646098063ccb0ecdfbab0';
+  const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
-  const clientSecret = '2e428da9fa8e4a8a93d31d28d3de5935'
+  const clientSecret = 'c9a77cd68aa24b10928be23547296a4e'
 
   const code = new URLSearchParams(window.location.search).get('code');
 
