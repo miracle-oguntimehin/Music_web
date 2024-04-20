@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FaSearch } from "react-icons/fa";
 import Card from './component/Card';
+import ArtistCard from './component/ArtistCard';
+import TrackCard from './component/TrackCard';
+import PlaylistCard from './component/PlaylistCard';
 
 interface SearchResult {
     albums: {
@@ -18,42 +21,83 @@ interface SearchResult {
     };
     artists: {
         items: {
-            name: string;
             external_urls: {
                 spotify: string;
             };
+            followers: {
+                total: number;
+            };
+            genres: string[];
+            images: {
+                url: string;
+            }[];
+            name: string;
+            popularity: number;
         }[];
     };
     tracks: {
         items: {
             album: {
-                name: string;
+                album_type: string;
                 artists: {
                     name: string;
                 }[];
                 external_urls: {
                     spotify: string;
                 };
+                name: string;
             };
-            name: string;
+            artists: {
+                external_urls: {
+                    spotify: string;
+                };
+                name: string;
+            }[];
+            available_markets: string[];
             external_urls: {
                 spotify: string;
             };
+            href: string;
+            id: string;
+            name: string;
+            preview_url: string;
+            track_number: number;
         }[];
     };
     playlists: {
         items: {
+            collaborative: boolean;
             description: string;
             external_urls: {
                 spotify: string;
             };
+            href: string;
+            id: string;
+            images: {
+                height: number | null;
+                url: string;
+                width: number | null;
+            }[];
             name: string;
             owner: {
                 display_name: string;
                 external_urls: {
                     spotify: string;
                 };
+                href: string;
+                id: string;
+                type: string;
+                uri: string;
             };
+            primary_color: string | null;
+            public: boolean | null;
+            snapshot_id: string;
+            tracks: {
+                href: string;
+                total: number;
+            };
+            type: string;
+            uri: string;
         }[];
     };
 }
@@ -101,6 +145,28 @@ const Search: React.FC = () => {
             <div>
                 {searchResults && (
                     <>
+
+                        <h2>Tracks</h2>
+                        {searchResults.tracks.items.length > 0 ? (
+                            <div className='container'>
+                                {searchResults.tracks.items.map((track, index) => (
+                                    <TrackCard track={track} key={index} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p>No tracks found.</p>
+                        )}
+
+                        <h2>Playlists</h2>
+                        {searchResults.playlists.items.length > 0 ? (
+                            <div className='container'>
+                                {searchResults.playlists.items.map((playlist, index) => (
+                                    <PlaylistCard playlist={playlist} key={index} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p>No playlists found.</p>
+                        )}
                         <h2>Albums</h2>
                         {searchResults.albums.items.length > 0 ? (
                             <div className='container'>
@@ -114,48 +180,15 @@ const Search: React.FC = () => {
 
                         <h2>Artists</h2>
                         {searchResults.artists.items.length > 0 ? (
-                            <ul>
-                                {searchResults.artists.items.map((artist) => (
-                                    <li key={artist.external_urls.spotify}>
-                                        <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                                            {artist.name}
-                                        </a>
-                                    </li>
+                            <div className='container'>
+                                {searchResults.artists.items.map((artist, index) => (
+                                    <ArtistCard artist={artist} key={index} />
                                 ))}
-                            </ul>
+                            </div>
                         ) : (
                             <p>No artists found.</p>
                         )}
 
-                        <h2>Tracks</h2>
-                        {searchResults.tracks.items.length > 0 ? (
-                            <ul>
-                                {searchResults.tracks.items.map((track) => (
-                                    <li key={track.external_urls.spotify}>
-                                        <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                                            <strong>{track.name}</strong> - {track.album.name} - {track.album.artists.map(artist => artist.name).join(', ')}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p>No tracks found.</p>
-                        )}
-
-                        <h2>Playlists</h2>
-                        {searchResults.playlists.items.length > 0 ? (
-                            <ul>
-                                {searchResults.playlists.items.map((playlist) => (
-                                    <li key={playlist.external_urls.spotify}>
-                                        <a href={playlist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                                            <strong>{playlist.name}</strong> by {playlist.owner.display_name} - {playlist.description}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p>No playlists found.</p>
-                        )}
                     </>
                 )}
             </div>
