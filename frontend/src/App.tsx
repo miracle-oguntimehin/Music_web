@@ -6,7 +6,7 @@ import MainContent from './component/MainContent';
 import Sidebar from './component/SideBar';
 import Footer from './component/Footer';
 import { BrowserRouter as Router,} from 'react-router-dom';
-import Player from './component/Player';
+import Player from './component/PlayerTest';
 
 
 function App() {

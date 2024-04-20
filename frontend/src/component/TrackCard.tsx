@@ -1,4 +1,5 @@
 import React from 'react';
+import EmbeddedTrack from './Player';
 
 interface TrackData {
     album: {
@@ -33,6 +34,11 @@ interface TrackCardProps {
 }
 
 const TrackCard: React.FC<TrackCardProps> = ({ track }) => {
+    const handleTrackClick = async () => {
+        localStorage.setItem('id', track.id)
+        window.location.reload()
+
+    }
     return (
         <div className="card mb-4">
             <div className="card-body">
@@ -42,7 +48,8 @@ const TrackCard: React.FC<TrackCardProps> = ({ track }) => {
                     Artist: {track.artists.map(artist => artist.name).join(', ')}<br />
                     Track Number: {track.track_number}
                 </p>
-                <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-2">Play</a>
+                <button type='button' onClick={handleTrackClick} className="btn btn-primary mt-2">Play</button>
+
             </div>
         </div>
     );
