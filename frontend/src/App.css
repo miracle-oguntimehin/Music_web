@@ -508,3 +508,12 @@ body {
   bottom: 0;
   width: 60%;
 }
+
+.btn-s {
+  border: none;
+  font-size: 14pt;
+  background-color: transparent !important;
+  border-radius: 8px;
+  padding: 5px 10px;
+  box-shadow: 1px 1px 3px 1px gray;
+}
