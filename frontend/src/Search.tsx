@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaSearch } from "react-icons/fa";
+import Card from './component/Card';
 
 interface SearchResult {
     albums: {
         items: {
-            album_type: string;
+            id: number;
+            name: string;
             artists: {
                 name: string;
             }[];
-            name: string;
-            external_urls: {
-                spotify: string;
-            };
+            images: {
+                url: string;
+            }[];
         }[];
     };
     artists: {
@@ -68,8 +69,9 @@ const Search: React.FC = () => {
             const config = {
                 headers: { Authorization: `Bearer ${accessToken}` },
             };
-            const response = await axios.get<SearchResult>(`https://api.spotify.com/v1/search?q=${query}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=30`, config);
+            const response = await axios.get<SearchResult>(`https://api.spotify.com/v1/search?q=${query}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=8`, config);
             setSearchResults(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error fetching search results:', error);
         }
@@ -101,15 +103,11 @@ const Search: React.FC = () => {
                     <>
                         <h2>Albums</h2>
                         {searchResults.albums.items.length > 0 ? (
-                            <ul>
-                                {searchResults.albums.items.map((album) => (
-                                    <li key={album.external_urls.spotify}>
-                                        <a href={album.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                                            <strong>{album.name}</strong> - {album.artists.map(artist => artist.name).join(', ')}
-                                        </a>
-                                    </li>
+                            <div className='container'>
+                                {searchResults.albums.items.map((album, index) => (
+                                    <Card album={album} key={index} />
                                 ))}
-                            </ul>
+                            </div>
                         ) : (
                             <p>No albums found.</p>
                         )}
