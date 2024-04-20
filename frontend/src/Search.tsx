@@ -68,7 +68,7 @@ const Search: React.FC = () => {
             const config = {
                 headers: { Authorization: `Bearer ${accessToken}` },
             };
-            const response = await axios.get<SearchResult>(`https://api.spotify.com/v1/search?q=hello&type=album%2Cartist%2Cplaylist%2Ctrack&limit=30`, config);
+            const response = await axios.get<SearchResult>(`https://api.spotify.com/v1/search?q=${query}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=30`, config);
             setSearchResults(response.data);
         } catch (error) {
             console.error('Error fetching search results:', error);
