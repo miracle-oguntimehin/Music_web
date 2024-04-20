@@ -14,7 +14,7 @@ const MainContent: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/music" element={<MusicApp />} />
       <Route path="/albums" element={<Album />} />
-      <Route path="/playlist/:id" element={<Playlist />} />
+      <Route path="/playlist/" element={<Playlist />} />
       <Route path="/category/:id" element={<Category />} />
       <Route path="/player/:id" element={<PlaylistOrAlbum />} />
       <Route path="/player/playlist/:id" element={<PlaylistEmbed />} />

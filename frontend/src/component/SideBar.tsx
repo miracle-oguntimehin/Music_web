@@ -12,22 +12,22 @@ const Sidebar: React.FC = () => {
         <ul className="nav-list">
           <li className="nav-item-container">
             <div className="nav-item" onClick={() => navigate('/')}>
-              
+
               <FaHome className="nav-icon" />
-              
+
               <span className="nav-span">Home</span>
-              
+
             </div>
           </li>
           <li className="nav-item-container">
-            <div className="nav-item"  onClick={() => navigate('/albums')}>
+            <div className="nav-item" onClick={() => navigate('/albums')}>
               <IoAlbums className="nav-icon" />
               <span className="nav-span">Albums</span>
             </div>
           </li>
-          
+
           <li className="nav-item-container">
-            <div className="nav-item" onClick={() => navigate('all-playlist')}>
+            <div className="nav-item" onClick={() => navigate('playlist')}>
               <FaMusic className="nav-icon" />
               <span className="nav-span">Playlist</span>
             </div>

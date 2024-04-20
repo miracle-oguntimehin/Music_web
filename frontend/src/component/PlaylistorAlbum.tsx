@@ -67,9 +67,6 @@ const PlaylistOrAlbum: React.FC = () => {
           src={`https://open.spotify.com/embed/album/${id.id}`}
           width="800"
           height="800"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
         ></iframe>}
     </div>
   );

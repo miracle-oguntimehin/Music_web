@@ -16,8 +16,14 @@ const Playlists: React.FC = () => {
 
   useEffect(() => {
     const fetchPlaylists = async () => {
+
+      const accessToken = localStorage.getItem('access_token');
       try {
-        const response = await axios.get('https://api.spotify.com/v1/browse/featured-playlists');
+        const config = {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        };
+        const response = await axios.get('https://api.spotify.com/v1/browse/featured-playlists',
+          config);
         const { items } = response.data.playlists;
         const formattedPlaylists: Playlist[] = items.map((item: any) => ({
           id: item.id,
@@ -38,7 +44,7 @@ const Playlists: React.FC = () => {
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Featured Playlists</h1>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
+      <div className="row">
         {playlists.map((playlist) => (
           <div className="col" key={playlist.id}>
             <div className="card h-100">
