@@ -43,23 +43,11 @@ interface PlaylistItem {
     primary_color: string;
 }
 
-interface Playlists {
-    href: string;
-    limit: number;
-    next: string | null;
-    offset: number;
-    previous: string | null;
-    total: number;
-    items: PlaylistItem[];
-}
-
-
-
 const Category = () => {
-    const { categoryId } = useParams<{ categoryId: string }>();
+    const { id } = useParams<{ id: string }>();
     const [playlists, setPlaylists] = useState<PlaylistItem[]>([]);
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [categoryName, setCategoryName] = useState('');
 
     useEffect(() => {
         const accessToken = localStorage.getItem('access_token');
@@ -70,11 +58,14 @@ const Category = () => {
                         headers: { Authorization: `Bearer ${accessToken}` },
                     };
 
-                    const res = await axios.get<Playlists>(
-                        `https://api.spotify.com/v1/browse/categories/${categoryId}/playlists`,
+                    const res = await axios.get(
+                        `https://api.spotify.com/v1/browse/categories/${id}/playlists`,
                         config
                     );
-                    setPlaylists(res.data.items);
+                    if (res) {
+                        setPlaylists(res?.data?.playlists?.items as PlaylistItem[]);
+                        setCategoryName(res?.data?.message);
+                    }
                     console.log(res.data);
                 } catch (err) {
                     console.log(err);
@@ -82,11 +73,11 @@ const Category = () => {
             }
         };
         fetchPlaylists();
-    }, [categoryId]);
+    }, [id]);
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">Category Detail</h1>
+            <h1 className="mb-4">{categoryName} Playlists</h1>
             <div className="row">
                 {playlists.map((playlist) => (
                     <div key={playlist.id} className="col-lg-4 mb-4">
@@ -94,7 +85,7 @@ const Category = () => {
                             <img src={playlist.images[0].url} className="card-img-top" alt={playlist.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{playlist.name}</h5>
-                                <p className="card-text">{playlist.description}</p>
+                                {/* <p className="card-text">{playlist.description}</p> */}
 
                                 <button type="button" onClick={() => navigate(`/player/playlist/${playlist.id}`)} className="btn btn-primary">
                                     Play
