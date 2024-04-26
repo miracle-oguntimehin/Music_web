@@ -517,3 +517,9 @@ body {
   padding: 5px 10px;
   box-shadow: 1px 1px 3px 1px gray;
 }
+
+.x {
+  float: right;
+  background-color: transparent;
+  border: none;
+}

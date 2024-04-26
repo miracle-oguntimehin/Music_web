@@ -6,7 +6,7 @@ import PlaylistOrAlbum from "./PlaylistorAlbum";
 import Album from "./Album";
 import Category from "./Category";
 import PlaylistEmbed from "./PlaylistEmbed";
-import Search from "../Search";
+import Search from "./Search";
 import EmbeddedTrack from "./Player";
 
 const MainContent: React.FC = () => {

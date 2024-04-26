@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 
 const EmbeddedTrack: React.FC = () => {
     const src = localStorage.getItem('id');
-    console.log(src)
+    const [close, setClose] = useState(false);
+    const handleclose = () => {
+        setClose(true);
+        localStorage.removeItem('id');
+    }
     return (
-
         <div className='track-player'>
-            {src &&
+            {src && !close && <>
+                <button className='x' title='close the player' type='button' onClick={handleclose}> X </button>
+                
                 <iframe
                     src={`https://open.spotify.com/embed/track/${src}?utm_source=generator?autoplay=true`}
                     width='100%'
@@ -19,6 +24,7 @@ const EmbeddedTrack: React.FC = () => {
                     loading="lazy"
                     style={{ borderRadius: '12px' }}
                 ></iframe>
+            </>
             }
         </div>
 

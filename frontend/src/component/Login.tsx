@@ -5,6 +5,7 @@ const Login: React.FC = () => {
   const clientId = '1b744272ce5646098063ccb0ecdfbab0';
   const redirectUrl = 'http://localhost:3000/';
   const handleLoginClick = () => {
+    localStorage.removeItem('id')
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUrl}&scope=streaming%20user-read-private%20user-read-email`;
     window.location.href = authUrl;
   };

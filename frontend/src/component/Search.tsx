@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaSearch } from "react-icons/fa";
-import Card from './component/Card';
-import ArtistCard from './component/ArtistCard';
-import TrackCard from './component/TrackCard';
-import PlaylistCard from './component/PlaylistCard';
+import Card from './Card';
+import ArtistCard from './ArtistCard';
+import TrackCard from './TrackCard';
+import PlaylistCard from './PlaylistCard';
 
 interface SearchResult {
     albums: {

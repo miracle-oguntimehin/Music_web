@@ -17,9 +17,9 @@ interface CategoryItem {
 
 const Home: React.FC = () => {
   const [Data, setData] = useState<CategoryItem[]>([]);
-  const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
+  const clientId = '1b744272ce5646098063ccb0ecdfbab0';
   const redirectUrl = 'http://localhost:3000/';
-  const clientSecret = 'c9a77cd68aa24b10928be23547296a4e'
+  const clientSecret = 'a083753d2c454951876ede8f661cccc9'
 
   const code = new URLSearchParams(window.location.search).get('code');
 
