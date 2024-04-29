@@ -657,11 +657,11 @@ body {
   z-index: 1;
   filter: blur(2px);
   background: linear-gradient(135deg, #1afbf0, #da00ff);
-  animation: loadtwo 1.5s ease-in-out infinite;
+  animation: loadtwo 2.5s ease-in-out infinite;
 }
 
 @keyframes loadtwo {
   50% {
-    transform: rotate(-80deg);
+    transform: rotate(-360deg);
   }
 }
