@@ -2,6 +2,8 @@ import React from "react";
 import { FaHome, FaMusic } from "react-icons/fa";
 import { IoAlbums } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { GiLoveSong } from "react-icons/gi";
+
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
@@ -19,6 +21,15 @@ const Sidebar: React.FC = () => {
 
             </div>
           </li>
+
+          <li className="nav-item-container">
+            <div className="nav-item" onClick={() => navigate('genres')}>
+              <GiLoveSong className="nav-icon" />
+              <span className="nav-span">Genres</span>
+            </div>
+          </li>
+
+
           <li className="nav-item-container">
             <div className="nav-item" onClick={() => navigate('/albums')}>
               <IoAlbums className="nav-icon" />
@@ -32,6 +43,8 @@ const Sidebar: React.FC = () => {
               <span className="nav-span">Playlist</span>
             </div>
           </li>
+
+
         </ul>
       </nav>
     </aside>

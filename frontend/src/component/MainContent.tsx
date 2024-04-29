@@ -8,6 +8,7 @@ import Category from "./Category";
 import PlaylistEmbed from "./PlaylistEmbed";
 import Search from "./Search";
 import EmbeddedTrack from "./Player";
+import GenreList from "./GenreList";
 
 const MainContent: React.FC = () => {
   return (<>
@@ -16,6 +17,7 @@ const MainContent: React.FC = () => {
       <Route path="/search" element={<Search />} />
       <Route path="/albums" element={<Album />} />
       <Route path="/playlist/" element={<Playlist />} />
+      <Route path="/genres/" element={<GenreList />} />
       <Route path="/category/:id" element={<Category />} />
       <Route path="/player/:id" element={<PlaylistOrAlbum />} />
       <Route path="/player/playlist/:id" element={<PlaylistEmbed />} />
