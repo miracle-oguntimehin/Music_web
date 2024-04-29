@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Login from './Login';
 import { Link } from 'react-router-dom';
+import Loader from './Loader';
 
 interface CategoryItem {
   href: string;
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
   const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
   const clientSecret = '467012610a0f4b45bd50ac1692c7b6d0'
+  const [loading, setLoading] = useState(false)
 
   const code = new URLSearchParams(window.location.search).get('code');
 
@@ -28,6 +30,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true)
         const headers = {
           'Content-Type': 'application/x-www-form-urlencoded',
         };
@@ -41,10 +44,11 @@ const Home: React.FC = () => {
         };
 
         const response = await axios.post(tokenUrl, data, { headers });
-        console.log(response.data);
         localStorage.setItem('access_token', response.data.access_token);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false)
       }
     };
 
@@ -60,6 +64,7 @@ const Home: React.FC = () => {
     const fetchAlbums = async () => {
       if (accessToken) {
         try {
+          setLoading(true)
           const config = {
             headers: { Authorization: `Bearer ${accessToken}` },
           };
@@ -69,9 +74,12 @@ const Home: React.FC = () => {
             config
           );
           setData(res.data.categories.items);
-          console.log(res.data)
         } catch (err) {
           console.log(err);
+        } finally {
+          setTimeout(() => {
+            setLoading(false)
+          }, 2000);
         }
       }
     };
@@ -79,29 +87,30 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div><br />
-      {!Data.length && <Login />}
-      <hr />
-      {!Data.length ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
+    loading ? <Loader /> :
+      <div><br />
+        {!Data.length && <Login />}
+        <hr />
+        {!Data.length ? <h1 className="title"> Welcome to Music Web, Please login to see our suggestions</h1> : <h1 className="title">Browse the most exiting music categories on Music Web</h1>}
 
-      <div className="container mt-4">
-        <div className="row">
-          {Data?.map((category: { id: string; icons: { url: string | undefined; }[]; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined; href: string | undefined; }, index: React.Key | null | undefined) => (
-            <div key={index} className="col-lg-4 mb-4">
-              <div className="card" style={{ width: '18rem' }}>
-                <img src={category.icons[0].url} className="card-img-top" alt={`${category.name}`} />
-                <div className="card-body">
-                  <h5 className="card-title">{category.name}</h5>
-                  <Link to={`/category/${category.id}`} className="btn btn-primary">
-                    Explore
-                  </Link>
+        <div className="container mt-4">
+          <div className="row">
+            {Data?.map((category: { id: string; icons: { url: string | undefined; }[]; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined; href: string | undefined; }, index: React.Key | null | undefined) => (
+              <div key={index} className="col-lg-4 mb-4">
+                <div className="card" style={{ width: '18rem' }}>
+                  <img src={category.icons[0].url} className="card-img-top" alt={`${category.name}`} />
+                  <div className="card-body">
+                    <h5 className="card-title">{category.name}</h5>
+                    <Link to={`/category/${category.id}`} className="btn btn-primary">
+                      Explore
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 
