@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Loader from './Loader';
 
 interface Owner {
     external_urls: { spotify: string };
@@ -48,12 +49,14 @@ const Category = () => {
     const [playlists, setPlaylists] = useState<PlaylistItem[]>([]);
     const navigate = useNavigate();
     const [categoryName, setCategoryName] = useState('');
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const accessToken = localStorage.getItem('access_token');
         const fetchPlaylists = async () => {
             if (accessToken) {
                 try {
+                    setLoading(true)
                     const config = {
                         headers: { Authorization: `Bearer ${accessToken}` },
                     };
@@ -66,9 +69,10 @@ const Category = () => {
                         setPlaylists(res?.data?.playlists?.items as PlaylistItem[]);
                         setCategoryName(res?.data?.message);
                     }
-                    console.log(res.data);
                 } catch (err) {
                     console.log(err);
+                } finally {
+                    setLoading(false)
                 }
             }
         };
@@ -78,23 +82,25 @@ const Category = () => {
     return (
         <div className="container mt-4">
             <h1 className="mb-4">{categoryName} Playlists</h1>
-            <div className="row">
-                {playlists.map((playlist) => (
-                    <div key={playlist.id} className="col-lg-4 mb-4">
-                        <div className="card" style={{ width: '18rem' }}>
-                            <img src={playlist.images[0].url} className="card-img-top" alt={playlist.name} />
-                            <div className="card-body">
-                                <h5 className="card-title">{playlist.name}</h5>
-                                {/* <p className="card-text">{playlist.description}</p> */}
+            {loading ? <Loader /> :
+                <div className="row">
+                    {playlists.map((playlist) => (
+                        <div key={playlist.id} className="col-lg-4 mb-4">
+                            <div className="card" style={{ width: '18rem' }}>
+                                <img src={playlist.images[0].url} className="card-img-top" alt={playlist.name} />
+                                <div className="card-body">
+                                    <h5 className="card-title">{playlist.name}</h5>
+                                    {/* <p className="card-text">{playlist.description}</p> */}
 
-                                <button type="button" onClick={() => navigate(`/player/playlist/${playlist.id}`)} className="btn btn-primary">
-                                    Play
-                                </button>
+                                    <button type="button" onClick={() => navigate(`/player/playlist/${playlist.id}`)} className="btn btn-primary">
+                                        Play
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            }
         </div>
     );
 };

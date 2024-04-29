@@ -5,6 +5,7 @@ import Card from './Card';
 import ArtistCard from './ArtistCard';
 import TrackCard from './TrackCard';
 import PlaylistCard from './PlaylistCard';
+import Loader from './Loader';
 
 interface SearchResult {
     albums: {
@@ -146,7 +147,7 @@ const Search: React.FC = () => {
                 <button title='search...' className='search-btn' type="submit"><FaSearch className='search-icon' /></button>
             </form>
             <div>
-                {searchResults && (
+                {searchResults && !loading ? (
                     <>
 
                         <h2>Tracks</h2>
@@ -193,7 +194,7 @@ const Search: React.FC = () => {
                         )}
 
                     </>
-                )}
+                ) : <Loader />}
             </div>
         </div>
     );
