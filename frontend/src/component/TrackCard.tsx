@@ -1,5 +1,4 @@
 import React from 'react';
-import EmbeddedTrack from './Player';
 
 interface TrackData {
     album: {

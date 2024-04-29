@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const GenreList = () => {
     const [genres, setGenres] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchGenres = async () => {
@@ -39,11 +41,11 @@ const GenreList = () => {
                 placeholder='Search genres'
                 value={searchTerm}
                 onChange={handleSearch}
-                className='search'
+                className='search-genres'
             />
             <div className='genres'>
                 {filteredGenres.map((genre, index) => (
-                    <button type='button' className='button' key={index}>{genre}</button>
+                    <button onClick={() => navigate(`/genres/${genre}`)} type='button' className='button' key={index}>{genre}</button>
                 ))}
             </div>
         </div>
