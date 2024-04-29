@@ -2,7 +2,7 @@ import React from 'react';
 import { FaSpotify } from "react-icons/fa";
 
 const Login: React.FC = () => {
-  const clientId = '1b744272ce5646098063ccb0ecdfbab0';
+  const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
   const redirectUrl = 'http://localhost:3000/';
   const handleLoginClick = () => {
     localStorage.removeItem('id')
