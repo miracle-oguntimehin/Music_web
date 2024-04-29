@@ -105,19 +105,22 @@ interface SearchResult {
 const Search: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [searchResults, setSearchResults] = useState<SearchResult | null>(null);
+    const [loading, setLoading] = useState(false)
 
     const handleSearch = async (query: string) => {
 
         const accessToken = localStorage.getItem('access_token');
         try {
+            setLoading(false)
             const config = {
                 headers: { Authorization: `Bearer ${accessToken}` },
             };
             const response = await axios.get<SearchResult>(`https://api.spotify.com/v1/search?q=${query}&type=album%2Cartist%2Cplaylist%2Ctrack&limit=8`, config);
-            setSearchResults(response.data);
-            console.log(response.data)
+            setSearchResults(response.data)
         } catch (error) {
             console.error('Error fetching search results:', error);
+        } finally {
+            setLoading(false)
         }
     };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaRegCirclePlay } from "react-icons/fa6";
+import Loader from './Loader';
 
 interface Track {
     available_markets: string[];
@@ -61,12 +62,12 @@ const GenreRecommendations: React.FC = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loader />;
     }
 
     return (
         <div>
-            <h2>Recommendations for {genre}</h2>
+            <h2>Recommendations for {genre}</h2><br /><br />
             <div className='tracks'>
                 {tracks.map((track: Track) => (
                     <div key={track.id} className='track'>

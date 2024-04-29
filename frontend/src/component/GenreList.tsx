@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 
 const GenreList = () => {
     const [genres, setGenres] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const fetchGenres = async () => {
             const accessToken = localStorage.getItem('access_token');
             try {
+                setLoading(true)
                 const response = await axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -19,6 +22,11 @@ const GenreList = () => {
                 setGenres(response.data.genres);
             } catch (error) {
                 console.error('Error fetching genres:', error);
+            } finally {
+
+                setTimeout(() => {
+                    setLoading(false)
+                }, 2000);
             }
         };
 
@@ -43,11 +51,13 @@ const GenreList = () => {
                 onChange={handleSearch}
                 className='search-genres'
             />
-            <div className='genres'>
-                {filteredGenres.map((genre, index) => (
-                    <button onClick={() => navigate(`/genres/${genre}`)} type='button' className='button' key={index}>{genre}</button>
-                ))}
-            </div>
+            {loading ? <Loader /> :
+                <div className='genres'>
+                    {filteredGenres.map((genre, index) => (
+                        <button onClick={() => navigate(`/genres/${genre}`)} type='button' className='button' key={index}>{genre}</button>
+                    ))}
+                </div>
+            }
         </div>
     );
 };
