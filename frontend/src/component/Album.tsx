@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from './Card';
+import Loader from './Loader';
 
 interface AlbumProps {
   id: number;
@@ -15,12 +16,14 @@ interface AlbumProps {
 
 const Album = () => {
   const [albumsData, setAlbumsData] = useState<AlbumProps[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
     const fetchAlbums = async () => {
       if (accessToken) {
         try {
+          setLoading(true)
           const config = {
             headers: { Authorization: `Bearer ${accessToken}` },
           };
@@ -30,9 +33,12 @@ const Album = () => {
             config
           );
           setAlbumsData(res.data.albums.items);
-          console.log(res.data)
         } catch (err) {
           console.log(err);
+        } finally {
+          setTimeout(() => {
+            setLoading(false)
+          }, 2000);
         }
       }
     };
@@ -42,11 +48,13 @@ const Album = () => {
   return (
     <div>
       <h1 className="title">Latest Albums</h1>
+      {loading ? <Loader />:
       <div className='container'>
         {albumsData.map((album, index) => (
           <Card album={album} key={index} />
         ))}
       </div>
+      }
     </div>
   );
 };

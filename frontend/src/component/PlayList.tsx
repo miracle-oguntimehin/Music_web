@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 
 interface Playlist {
   id: string;
@@ -13,12 +14,14 @@ interface Playlist {
 const Playlists: React.FC = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchPlaylists = async () => {
 
       const accessToken = localStorage.getItem('access_token');
       try {
+        setLoading(true)
         const config = {
           headers: { Authorization: `Bearer ${accessToken}` },
         };
@@ -35,6 +38,10 @@ const Playlists: React.FC = () => {
         setPlaylists(formattedPlaylists);
       } catch (error) {
         console.error('Error fetching featured playlists:', error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
       }
     };
 
@@ -44,6 +51,7 @@ const Playlists: React.FC = () => {
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Featured Playlists</h1>
+      {loading ? <Loader /> : 
       <div className="row">
         {playlists.map((playlist) => (
           <div className="col" key={playlist.id}>
@@ -60,6 +68,7 @@ const Playlists: React.FC = () => {
           </div>
         ))}
       </div>
+      }
     </div>
   );
 };
