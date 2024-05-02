@@ -38,6 +38,10 @@ const Playlists: React.FC = () => {
         setPlaylists(formattedPlaylists);
       } catch (error) {
         console.error('Error fetching featured playlists:', error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
       }
     };
 
@@ -47,6 +51,7 @@ const Playlists: React.FC = () => {
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Featured Playlists</h1>
+      {loading ? <Loader /> : 
       <div className="row">
         {playlists.map((playlist) => (
           <div className="col" key={playlist.id}>
@@ -63,6 +68,7 @@ const Playlists: React.FC = () => {
           </div>
         ))}
       </div>
+      }
     </div>
   );
 };
