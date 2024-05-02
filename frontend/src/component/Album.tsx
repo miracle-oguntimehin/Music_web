@@ -16,7 +16,6 @@ interface AlbumProps {
 
 const Album = () => {
   const [albumsData, setAlbumsData] = useState<AlbumProps[]>([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
@@ -35,10 +34,6 @@ const Album = () => {
           setAlbumsData(res.data.albums.items);
         } catch (err) {
           console.log(err);
-        } finally {
-          setTimeout(() => {
-            setLoading(false)
-          }, 2000);
         }
       }
     };
@@ -48,13 +43,11 @@ const Album = () => {
   return (
     <div>
       <h1 className="title">Latest Albums</h1>
-      {loading ? <Loader />:
       <div className='container'>
         {albumsData.map((album, index) => (
           <Card album={album} key={index} />
         ))}
       </div>
-      }
     </div>
   );
 };
