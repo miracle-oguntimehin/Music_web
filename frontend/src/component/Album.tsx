@@ -22,7 +22,6 @@ const Album = () => {
     const fetchAlbums = async () => {
       if (accessToken) {
         try {
-          setLoading(true)
           const config = {
             headers: { Authorization: `Bearer ${accessToken}` },
           };
