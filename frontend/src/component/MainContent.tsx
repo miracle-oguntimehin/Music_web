@@ -10,6 +10,7 @@ import Search from "./Search";
 import EmbeddedTrack from "./Player";
 import GenreList from "./GenreList";
 import GenreRecommendations from "./Genre";
+import Mood from "./Mood";
 
 const MainContent: React.FC = () => {
   return (<>
@@ -19,6 +20,7 @@ const MainContent: React.FC = () => {
       <Route path="/albums" element={<Album />} />
       <Route path="/playlist/" element={<Playlist />} />
       <Route path="/genres/" element={<GenreList />} />
+      <Route path="/moody/" element={<Mood />} />
       <Route path="/genres/:genre" element={<GenreRecommendations />} />
       <Route path="/category/:id" element={<Category />} />
       <Route path="/player/:id" element={<PlaylistOrAlbum />} />
