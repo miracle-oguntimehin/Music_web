@@ -18,9 +18,9 @@ interface CategoryItem {
 
 const Home: React.FC = () => {
   const [Data, setData] = useState<CategoryItem[]>([]);
-  const clientId = 'b6c63c6eb96d49f2ae6aed718e5391bb';
+  const clientId = localStorage.getItem('id');
   const redirectUrl = 'http://localhost:3000/';
-  const clientSecret = 'db73b3c769f4459eb5fb8f149fdc7aa8'
+  const clientSecret = localStorage.getItem('secret')
   const [loading, setLoading] = useState(false)
 
   const code = new URLSearchParams(window.location.search).get('code');
@@ -45,6 +45,7 @@ const Home: React.FC = () => {
 
         const response = await axios.post(tokenUrl, data, { headers });
         localStorage.setItem('access_token', response.data.access_token);
+        window.location.reload()
       } catch (error) {
         console.error(error);
       } finally {

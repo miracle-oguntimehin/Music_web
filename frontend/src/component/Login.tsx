@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaSpotify } from "react-icons/fa";
 import { Modal } from 'antd';
 
@@ -11,9 +11,11 @@ const Login: React.FC = () => {
   const handleLoginClick = () => {
     setVisible(true);
     localStorage.removeItem('id')
-    
+
   };
   const handleLoginSubmit = () => {
+    localStorage.setItem('id', clientId)
+    localStorage.setItem('secret', clientSecret)
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUrl}&scope=streaming%20user-read-private%20user-read-email`;
     window.location.href = authUrl;
   }
@@ -26,6 +28,14 @@ const Login: React.FC = () => {
     setClientSecret(e.target.value)
   }
 
+  useEffect(() => {
+    const clientID = localStorage.getItem('id')
+    setClientId(clientID ? clientID : '')
+
+
+  }, [])
+
+
   return (
     <>
       <button type='button' className='btnl' onClick={handleLoginClick}>
@@ -33,28 +43,28 @@ const Login: React.FC = () => {
         <FaSpotify className='icon' />
       </button>
 
-      {visible && 
-      <Modal
-      title="Login using your spotify dev account"
-      open={visible}
-      onOk={handleLoginSubmit}
-      onCancel={() => setVisible(false)}
-  >
-      <input
-          type="text"
-          placeholder="Please enter your client ID"
-          value={clientId}
-          onChange={handleIdChange}
-          className='search-input'
-      />
-      <input
-          type="text"
-          placeholder="Please enter your client Secret"
-          value={clientSecret}
-          onChange={handleSecretChange}
-          className='search-input'
-      />
-  </Modal>
+      {visible &&
+        <Modal
+          title="Login using your spotify dev account"
+          open={visible}
+          onOk={handleLoginSubmit}
+          onCancel={() => setVisible(false)}
+        >
+          <input
+            type="text"
+            placeholder="Please enter your client ID"
+            value={clientId}
+            onChange={handleIdChange}
+            className='search-input'
+          />
+          <input
+            type="text"
+            placeholder="Please enter your client Secret"
+            value={clientSecret}
+            onChange={handleSecretChange}
+            className='search-input'
+          />
+        </Modal>
       }
 
     </>);
